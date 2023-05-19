@@ -52,4 +52,4 @@ rsconnect/
 testBench.R
 
 # Exclude all csv files
-**/*.csv
+*.csv
