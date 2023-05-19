@@ -31,16 +31,18 @@ traitExtract <- function(cellState) {
     cellCount <- length(json_data[[cellState]]$Cells)
     # Create empty table for data storage
     table <- as.data.frame(matrix(nrow = length(json_data[[cellState]]$Cells), ncol = 4))
-    colnames(live_table) <- trait_list
+    colnames(table) <- trait_list
     for (i in 1:cellCount) {
       for (j in 1:length(trait_list)) {
         table[i, j] <- json_data[[cellState]]$Cells[[i]][trait_list[j]]
       }
     }
     if (cellState == 1) {
-      write.csv(table, file = "./Cell_Table/live_cell.csv")
+      live_cells <- assign("live_cells", table, envir = parent.frame())
+      return(live_cells)
     } else{
-      write.csv(table, file = "./Cell_Table/dead_cell.csv")
+      dead_cells <- assign("dead_cells", table, envir = parent.frame())
+      return(dead_cells)
     }
   }
 }
